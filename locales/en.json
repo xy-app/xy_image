@@ -1,0 +1,75 @@
+{
+  "name": "Image Finding & Computer Vision (Image & Vision)",
+  "description": "Provides screen template matching, multi-point color finding, pixel extraction, image cropping, and contour analysis",
+  "group": "Image & Vision",
+  "actions": {
+    "BlobAnalysis": {
+      "display_name": "Blob & Connected Component Analysis",
+      "description": "Analyze isolated graphical blobs, computing area, bounding box, and count"
+    },
+    "CropImage": {
+      "display_name": "Crop Image",
+      "description": "Crop a designated rectangular region from an image into a new sub-image"
+    },
+    "CvtColor": {
+      "display_name": "Convert Color Space",
+      "description": "Convert image color format (e.g. RGB to Grayscale, BGR, HSV)"
+    },
+    "FindColor": {
+      "display_name": "Find Color / Color Block",
+      "description": "Locate pixel coordinates matching specified color or color range"
+    },
+    "FindContours": {
+      "display_name": "Find & Filter Contours",
+      "description": "Extract object boundary contours from binary images, calculating area and centroid"
+    },
+    "FindMultiColor": {
+      "display_name": "Multi-Point Color Finding",
+      "description": "Accurately locate targets by matching multiple relative color anchor points"
+    },
+    "GetPixelColor": {
+      "display_name": "Get Pixel Color",
+      "description": "Retrieve the RGB color value of a specific coordinate to check button or status indicators"
+    },
+    "ImageBlur": {
+      "display_name": "Image Blur & Denoise",
+      "description": "Apply Gaussian or box blur to smooth out noise and artifacts"
+    },
+    "ImageComparison": {
+      "display_name": "Image Comparison & Diff",
+      "description": "Compare two images, calculate similarity percentage, and highlight changed regions"
+    },
+    "ImageInRange": {
+      "display_name": "Color Range Mask Extraction",
+      "description": "Extract binary mask isolating pixels falling within specific lower/upper color thresholds"
+    },
+    "ImageMorphology": {
+      "display_name": "Morphological Operations",
+      "description": "Perform dilation, erosion, opening, or closing to connect gaps or remove noise"
+    },
+    "ImageRotate": {
+      "display_name": "Rotate & Flip Image",
+      "description": "Rotate image by arbitrary angle or perform horizontal/vertical flips"
+    },
+    "ImageThreshold": {
+      "display_name": "Image Thresholding & Binarization",
+      "description": "Convert image to pure black/white binary image using Otsu or adaptive thresholding"
+    },
+    "MatchTemplate": {
+      "display_name": "Template Matching (Find Image)",
+      "description": "Search for a sub-image template within screen or larger image by correlation matching"
+    },
+    "ResizeImage": {
+      "display_name": "Resize Image",
+      "description": "Scale image dimensions by absolute width/height or proportional ratio"
+    },
+    "ShapeRecognition": {
+      "display_name": "Shape Recognition & Matching",
+      "description": "Automatically detect geometric shapes (circles, rectangles, triangles, polygons)"
+    },
+    "TableGridDetect": {
+      "display_name": "Table Grid & Cell Detection",
+      "description": "Detect horizontal/vertical lines and grid structure in images to segment cells"
+    }
+  }
+}

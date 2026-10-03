@@ -1,0 +1,75 @@
+{
+  "name": "Bildsuche & Computer Vision (Image & Vision)",
+  "description": "Bietet Bildschirm-Vorlagenabgleich, Mehrpunkt-Farbsuche, Pixelextraktion und Konturanalyse",
+  "group": "Bild- & Bildverarbeitung",
+  "actions": {
+    "BlobAnalysis": {
+      "display_name": "Blob- & Zusammenhangskomponenten-Analyse",
+      "description": "Analysiert isolierte Bildbereiche nach Fläche, Position und Anzahl"
+    },
+    "CropImage": {
+      "display_name": "Bild zuschneiden",
+      "description": "Schneidet einen bestimmten rechteckigen Bereich aus einem Bild aus"
+    },
+    "CvtColor": {
+      "display_name": "Farbraum konvertieren",
+      "description": "Konvertiert Farbräume von Bildern (z. B. RGB zu Graustufen, HSV)"
+    },
+    "FindColor": {
+      "display_name": "Farbe suchen & Farbbereich lokalisieren",
+      "description": "Findet Pixel-Koordinaten bestimmter Farben oder Farbbereiche"
+    },
+    "FindContours": {
+      "display_name": "Konturen finden & filtern",
+      "description": "Extrahiert Objektkonturen aus Binärbildern und berechnet Fläche und Mittelpunkt"
+    },
+    "FindMultiColor": {
+      "display_name": "Mehrpunkt-Ankerfarbsuche",
+      "description": "Präzise Zielerkennung durch Abgleich mehrerer relativer Farb-Ankerpunkte"
+    },
+    "GetPixelColor": {
+      "display_name": "Pixelfarbe ermitteln",
+      "description": "Ermittelt den RGB-Farbwert an bestimmten Koordinaten zur Statusprüfung"
+    },
+    "ImageBlur": {
+      "display_name": "Bild glätten & Rauschen reduzieren",
+      "description": "Wendet Glättungsfilter an, um Rauschen und Störpunkte zu entfernen"
+    },
+    "ImageComparison": {
+      "display_name": "Bildvergleich & Differenzanalyse",
+      "description": "Vergleicht zwei Bilder, berechnet die Ähnlichkeit und markiert Änderungen"
+    },
+    "ImageInRange": {
+      "display_name": "Farbbereichsmasken-Extraktion",
+      "description": "Extrahiert Binärmasken anhand oberer und unterer Farbschwellenwerte"
+    },
+    "ImageMorphology": {
+      "display_name": "Morphologische Operationen",
+      "description": "Führt Dilatation, Erosion, Öffnung oder Schließung auf Binärbildern aus"
+    },
+    "ImageRotate": {
+      "display_name": "Bild drehen & spiegeln",
+      "description": "Dreht Bilder um beliebige Winkel oder spiegelt horizontal/vertikal"
+    },
+    "ImageThreshold": {
+      "display_name": "Schwellenwert- & Binärisierungsfilter",
+      "description": "Konvertiert Bilder in Schwarz-Weiß über adaptive Schwellenwerte oder Otsu"
+    },
+    "MatchTemplate": {
+      "display_name": "Vorlagenabgleich (Bild finden)",
+      "description": "Sucht ein Vorlagen-Bild auf dem Bildschirm oder in einem größeren Bild"
+    },
+    "ResizeImage": {
+      "display_name": "Bildgröße ändern",
+      "description": "Skaliert Bildabmessungen absolut oder proportional"
+    },
+    "ShapeRecognition": {
+      "display_name": "Formerkennung & -abgleich",
+      "description": "Erkennt automatisch Kreise, Rechtecke, Dreiecke oder Polygone"
+    },
+    "TableGridDetect": {
+      "display_name": "Tabellengitter- & Zellenerkennung",
+      "description": "Erkennt Tabellenlinien und Gitterstrukturen, um einzelne Zellen zu segmentieren"
+    }
+  }
+}

@@ -1,0 +1,75 @@
+{
+  "name": "找圖與影像辨識 (Image & Vision)",
+  "description": "提供螢幕找圖、多點找色、擷取像素顏色、圖片裁剪旋轉、表格網格分割與影像相似度比對等功能",
+  "group": "影像處理",
+  "actions": {
+    "BlobAnalysis": {
+      "display_name": "連通域與斑點分析 (BlobAnalysis)",
+      "description": "分析圖片中的獨立圖形區塊，計算大小、位置和數量，常用於目標統計與標記"
+    },
+    "CropImage": {
+      "display_name": "影像精確裁剪 (CropImage)",
+      "description": "截取圖片中的指定矩形局部區域，生成一張新的小圖"
+    },
+    "CvtColor": {
+      "display_name": "色彩空間轉換 (CvtColor)",
+      "description": "轉換圖片的色彩模式（如彩色轉黑白灰度、HSV、RGB轉換等）"
+    },
+    "FindColor": {
+      "display_name": "區域找色與色塊定位 (FindColor)",
+      "description": "在螢幕或圖片中尋找指定顏色的像素或色塊位置"
+    },
+    "FindContours": {
+      "display_name": "輪廓擷取與多維過濾 (FindContours)",
+      "description": "擷取黑白圖片中的物體輪廓邊緣，取得物體的中心位置與大小"
+    },
+    "FindMultiColor": {
+      "display_name": "多點錨點找色 (FindMultiColor)",
+      "description": "透過比對多個固定相對位置的顏色點來精準定位目標，抗干擾能力極強"
+    },
+    "GetPixelColor": {
+      "display_name": "像素拾色與狀態判定 (GetPixelColor)",
+      "description": "取得螢幕或圖片上指定座標點的顏色值，可快速判斷按鈕或指示燈狀態"
+    },
+    "ImageBlur": {
+      "display_name": "影像平滑降噪 (ImageBlur)",
+      "description": "對圖片進行平滑模糊去噪處理，消除噪點干擾"
+    },
+    "ImageComparison": {
+      "display_name": "影像比對與變動分析 (ImageComparison)",
+      "description": "比對兩張圖片是否相同，計算相似度百分比並標出變動區域"
+    },
+    "ImageInRange": {
+      "display_name": "色彩區間遮罩擷取 (ImageInRange)",
+      "description": "設定顏色上下限閾值，擷取出符合顏色範圍的目標黑白遮罩圖"
+    },
+    "ImageMorphology": {
+      "display_name": "形態學操作 (ImageMorphology)",
+      "description": "執行膨脹、侵蝕、開運算、閉運算等操作，斷開沾黏或填補孔洞"
+    },
+    "ImageRotate": {
+      "display_name": "影像旋轉與翻轉 (ImageRotate)",
+      "description": "支援圖片任意角度旋轉，或水平翻轉、垂直鏡像"
+    },
+    "ImageThreshold": {
+      "display_name": "智慧影像二值化 (ImageThreshold)",
+      "description": "將彩色或灰階圖片轉為純黑白二值圖（支援 Otsu 大津演算法與自適應閾值）"
+    },
+    "MatchTemplate": {
+      "display_name": "範本比對定位 (MatchTemplate)",
+      "description": "在螢幕或大圖中尋找指定的小圖示位置，支援設定相似度閾值"
+    },
+    "ResizeImage": {
+      "display_name": "影像尺寸縮放 (ResizeImage)",
+      "description": "按固定寬高或等比例放大縮小圖片尺寸"
+    },
+    "ShapeRecognition": {
+      "display_name": "幾何形狀辨識與比對 (ShapeRecognition)",
+      "description": "自動辨識影像中的多邊形、圓形、三角形或矩形形狀"
+    },
+    "TableGridDetect": {
+      "display_name": "表格網格檢測與儲存格擷取 (TableGridDetect)",
+      "description": "檢測圖片中的表格橫豎線與網格結構，自動切分出各個儲存格區域"
+    }
+  }
+}

@@ -1,0 +1,1171 @@
+{
+  "plugin_id": "xy_image",
+  "name": "找图与图像识别 (Image & Vision)",
+  "version": "0.51.0",
+  "group": "Image",
+  "group_icon": "🖼",
+  "description": "提供屏幕找图、多点找色、提取像素颜色、图片裁剪旋转、表格网格分割与图像相似度比对等功能",
+  "actions": [
+    {
+      "tag": "BlobAnalysis",
+      "display_name": "连通域与斑点分析 (BlobAnalysis)",
+      "icon": "🫧",
+      "platforms": "All",
+      "description": "分析图片中的独立图形块，计算大小、位置和数量，常用于目标统计与标记",
+      "keywords": [
+        "blob",
+        "connected_components",
+        "连通域",
+        "斑点分析",
+        "计数",
+        "面积统计",
+        "质心定位",
+        "工业缺陷"
+      ],
+      "fields": [
+        {
+          "name": "image",
+          "display_name": "源二值图像",
+          "intrinsic_type": "FilePicker",
+          "default_type": "string",
+          "default_value": "",
+          "presets": [],
+          "description": "二值图像路径或变量"
+        },
+        {
+          "name": "connectivity",
+          "display_name": "连通邻域 (4 或 8)",
+          "intrinsic_type": "number",
+          "default_type": "number",
+          "default_value": "8",
+          "presets": [
+            "4",
+            "8"
+          ],
+          "description": "邻域连通性"
+        },
+        {
+          "name": "min_area",
+          "display_name": "最小斑点面积",
+          "intrinsic_type": "number",
+          "default_type": "number",
+          "default_value": "10",
+          "presets": [
+            "5",
+            "10",
+            "50"
+          ],
+          "description": "过滤微小噪点"
+        },
+        {
+          "name": "max_area",
+          "display_name": "最大斑点面积",
+          "intrinsic_type": "number",
+          "default_type": "number",
+          "default_value": "1000000",
+          "presets": [
+            "10000",
+            "1000000"
+          ],
+          "description": "最大允许斑点面积"
+        }
+      ],
+      "output_type": "Point"
+    },
+    {
+      "tag": "CropImage",
+      "display_name": "图像精确裁剪 (CropImage)",
+      "icon": "✂️",
+      "platforms": "All",
+      "description": "截取图片中的指定矩形局部区域，生成一张新的小图",
+      "keywords": [
+        "crop",
+        "cut",
+        "裁剪",
+        "截图",
+        "中心裁剪",
+        "ROI截取"
+      ],
+      "fields": [
+        {
+          "name": "image",
+          "display_name": "源图像路径或变量",
+          "intrinsic_type": "FilePicker",
+          "default_type": "string",
+          "default_value": "",
+          "presets": [],
+          "description": "输入图像"
+        },
+        {
+          "name": "rect",
+          "display_name": "裁剪区域 (x, y, w, h)",
+          "intrinsic_type": "string",
+          "default_type": "string",
+          "default_value": "0, 0, 200, 200",
+          "presets": [
+            "0, 0, 200, 200",
+            "300, 300"
+          ],
+          "description": "裁剪矩形坐标或中心宽高"
+        },
+        {
+          "name": "crop_mode",
+          "display_name": "裁剪模式",
+          "intrinsic_type": "string",
+          "default_type": "string",
+          "default_value": "Rect",
+          "presets": [
+            "Rect",
+            "Center"
+          ],
+          "description": "自由坐标或中心锚点"
+        },
+        {
+          "name": "output_path",
+          "display_name": "保存路径 (可选)",
+          "intrinsic_type": "string",
+          "default_type": "string",
+          "default_value": "",
+          "presets": [],
+          "description": "可选输出路径"
+        }
+      ],
+      "output_type": "Image"
+    },
+    {
+      "tag": "CvtColor",
+      "display_name": "颜色空间转换 (CvtColor)",
+      "icon": "🎨",
+      "platforms": "All",
+      "description": "转换图片的色彩模式（如彩色转黑白灰度等）",
+      "keywords": [
+        "color",
+        "cvt_color",
+        "色彩空间",
+        "灰度化",
+        "hsv",
+        "rgb",
+        "bgr"
+      ],
+      "fields": [
+        {
+          "name": "image",
+          "display_name": "源图像路径或变量",
+          "intrinsic_type": "FilePicker",
+          "default_type": "string",
+          "default_value": "",
+          "presets": [],
+          "description": "输入图像"
+        },
+        {
+          "name": "code",
+          "display_name": "转换模式",
+          "intrinsic_type": "string",
+          "default_type": "string",
+          "default_value": "RGB2GRAY",
+          "presets": [
+            "RGB2GRAY",
+            "BGR2GRAY",
+            "RGB2HSV",
+            "BGR2RGB"
+          ],
+          "description": "颜色转换类型"
+        },
+        {
+          "name": "output_path",
+          "display_name": "保存路径 (可选)",
+          "intrinsic_type": "string",
+          "default_type": "string",
+          "default_value": "",
+          "presets": [],
+          "description": "可选输出路径"
+        }
+      ],
+      "output_type": "Image"
+    },
+    {
+      "tag": "FindColor",
+      "display_name": "区域找色与色块定位 (FindColor)",
+      "icon": "🎯",
+      "platforms": "All",
+      "description": "在屏幕或图片中寻找指定颜色的像素或色块位置",
+      "keywords": [
+        "color",
+        "find_color",
+        "找色",
+        "找色块",
+        "像素定位",
+        "容差"
+      ],
+      "fields": [
+        {
+          "name": "image",
+          "display_name": "源图像路径或变量",
+          "intrinsic_type": "FilePicker",
+          "default_type": "string",
+          "default_value": "",
+          "presets": [],
+          "description": "输入图像"
+        },
+        {
+          "name": "color",
+          "display_name": "目标颜色 (如 #FF0000)",
+          "intrinsic_type": "string",
+          "default_type": "string",
+          "default_value": "#FF0000",
+          "presets": [
+            "#FF0000",
+            "#00FF00",
+            "#0000FF",
+            "#FFFFFF"
+          ],
+          "description": "Hex或RGB色值"
+        },
+        {
+          "name": "tolerance",
+          "display_name": "偏色容差 (0~255)",
+          "intrinsic_type": "number",
+          "default_type": "number",
+          "default_value": "10",
+          "presets": [
+            "0",
+            "5",
+            "10",
+            "20"
+          ],
+          "description": "容许的颜色波动范围"
+        },
+        {
+          "name": "search_region",
+          "display_name": "搜索区域 ROI",
+          "intrinsic_type": "string",
+          "default_type": "string",
+          "default_value": "",
+          "presets": [],
+          "description": "x, y, w, h 区域"
+        },
+        {
+          "name": "find_mode",
+          "display_name": "定位模式",
+          "intrinsic_type": "string",
+          "default_type": "string",
+          "default_value": "First",
+          "presets": [
+            "First",
+            "Centroid"
+          ],
+          "description": "首个像素或色块质心"
+        },
+        {
+          "name": "debug_save_path",
+          "display_name": "调试截图路径",
+          "intrinsic_type": "string",
+          "default_type": "string",
+          "default_value": "",
+          "presets": [],
+          "description": "可视化标记保存路径"
+        }
+      ],
+      "output_type": "Point"
+    },
+    {
+      "tag": "FindContours",
+      "display_name": "轮廓提取与多维过滤 (FindContours)",
+      "icon": "〰️",
+      "platforms": "All",
+      "description": "提取黑白图片中的物体轮廓边缘，获取物体的中心位置和大小",
+      "keywords": [
+        "contour",
+        "find_contours",
+        "轮廓提取",
+        "边缘追踪",
+        "多维过滤",
+        "面积过滤",
+        "外接矩形"
+      ],
+      "fields": [
+        {
+          "name": "image",
+          "display_name": "源二值/灰度图像",
+          "intrinsic_type": "FilePicker",
+          "default_type": "string",
+          "default_value": "",
+          "presets": [],
+          "description": "二值化或灰度图像"
+        },
+        {
+          "name": "min_area",
+          "display_name": "最小面积阈值",
+          "intrinsic_type": "real",
+          "default_type": "real",
+          "default_value": "10.0",
+          "presets": [
+            "5.0",
+            "10.0",
+            "50.0",
+            "100.0"
+          ],
+          "description": "滤除微小噪点面积"
+        },
+        {
+          "name": "max_area",
+          "display_name": "最大面积阈值",
+          "intrinsic_type": "real",
+          "default_type": "real",
+          "default_value": "10000000.0",
+          "presets": [
+            "10000.0",
+            "1000000.0"
+          ],
+          "description": "最大轮廓面积"
+        },
+        {
+          "name": "min_perimeter",
+          "display_name": "最小周长阈值",
+          "intrinsic_type": "real",
+          "default_type": "real",
+          "default_value": "0.0",
+          "presets": [
+            "0.0",
+            "20.0",
+            "50.0"
+          ],
+          "description": "最小周长"
+        }
+      ],
+      "output_type": "Point"
+    },
+    {
+      "tag": "FindMultiColor",
+      "display_name": "多点锚点找色 (FindMultiColor)",
+      "icon": "🌈",
+      "platforms": "All",
+      "description": "通过比对多个固定相对位置的颜色点来精准定位目标，抗干扰能力极强",
+      "keywords": [
+        "multi_color",
+        "find_multi_color",
+        "多点找色",
+        "比色",
+        "锚点定位",
+        "动态界面"
+      ],
+      "fields": [
+        {
+          "name": "image",
+          "display_name": "源图像路径或变量",
+          "intrinsic_type": "FilePicker",
+          "default_type": "string",
+          "default_value": "",
+          "presets": [],
+          "description": "输入图像"
+        },
+        {
+          "name": "anchor_color",
+          "display_name": "主点基准颜色",
+          "intrinsic_type": "string",
+          "default_type": "string",
+          "default_value": "#FFFFFF",
+          "presets": [
+            "#FFFFFF",
+            "#1E90FF"
+          ],
+          "description": "主点色值"
+        },
+        {
+          "name": "offset_points",
+          "display_name": "相对偏移点列表",
+          "intrinsic_type": "string",
+          "default_type": "string",
+          "default_value": "5,0,#FF0000|0,5,#0000FF",
+          "presets": [],
+          "description": "格式: dx,dy,#Color|..."
+        },
+        {
+          "name": "tolerance",
+          "display_name": "偏色容差 (0~255)",
+          "intrinsic_type": "number",
+          "default_type": "number",
+          "default_value": "15",
+          "presets": [
+            "10",
+            "15",
+            "25"
+          ],
+          "description": "容许的颜色波动范围"
+        },
+        {
+          "name": "search_region",
+          "display_name": "搜索区域 ROI",
+          "intrinsic_type": "string",
+          "default_type": "string",
+          "default_value": "",
+          "presets": [],
+          "description": "限定搜索区域"
+        },
+        {
+          "name": "debug_save_path",
+          "display_name": "调试截图路径",
+          "intrinsic_type": "string",
+          "default_type": "string",
+          "default_value": "",
+          "presets": [],
+          "description": "可视化标记保存路径"
+        }
+      ],
+      "output_type": "Point"
+    },
+    {
+      "tag": "GetPixelColor",
+      "display_name": "像素拾色与状态判定 (GetPixelColor)",
+      "icon": "🔍",
+      "platforms": "All",
+      "description": "获取屏幕或图片上指定坐标点的颜色值，可快速判断按钮或指示灯状态",
+      "keywords": [
+        "pixel",
+        "get_color",
+        "拾色",
+        "测色",
+        "像素颜色",
+        "指示灯状态"
+      ],
+      "fields": [
+        {
+          "name": "image",
+          "display_name": "源图像路径或变量",
+          "intrinsic_type": "FilePicker",
+          "default_type": "string",
+          "default_value": "",
+          "presets": [],
+          "description": "输入图像"
+        },
+        {
+          "name": "coord",
+          "display_name": "像素坐标 (x, y)",
+          "intrinsic_type": "string",
+          "default_type": "string",
+          "default_value": "0,0",
+          "presets": [],
+          "description": "目标点坐标"
+        },
+        {
+          "name": "expected_color",
+          "display_name": "期望颜色 (可选校验)",
+          "intrinsic_type": "string",
+          "default_type": "string",
+          "default_value": "",
+          "presets": [
+            "#00FF00",
+            "#FF0000",
+            "#FFFFFF"
+          ],
+          "description": "若提供则校验匹配"
+        },
+        {
+          "name": "tolerance",
+          "display_name": "容差 (0~255)",
+          "intrinsic_type": "number",
+          "default_type": "number",
+          "default_value": "10",
+          "presets": [
+            "5",
+            "10",
+            "20"
+          ],
+          "description": "比对容差"
+        }
+      ],
+      "output_type": "string"
+    },
+    {
+      "tag": "ImageBlur",
+      "display_name": "图像平滑降噪 (ImageBlur)",
+      "icon": "🌫️",
+      "platforms": "All",
+      "description": "对图片进行平滑模糊去噪处理，消除噪点干扰",
+      "keywords": [
+        "blur",
+        "smooth",
+        "filter",
+        "gaussian",
+        "median",
+        "降噪",
+        "平滑",
+        "高斯模糊",
+        "中值滤波"
+      ],
+      "fields": [
+        {
+          "name": "image",
+          "display_name": "源图像路径或变量",
+          "intrinsic_type": "FilePicker",
+          "default_type": "string",
+          "default_value": "",
+          "presets": [],
+          "description": "输入图像"
+        },
+        {
+          "name": "filter_type",
+          "display_name": "滤波算法",
+          "intrinsic_type": "string",
+          "default_type": "string",
+          "default_value": "Gaussian",
+          "presets": [
+            "Gaussian",
+            "Median",
+            "Box"
+          ],
+          "description": "高斯/中值/方框"
+        },
+        {
+          "name": "radius",
+          "display_name": "滤波半径/Sigma",
+          "intrinsic_type": "real",
+          "default_type": "real",
+          "default_value": "2.0",
+          "presets": [
+            "1.0",
+            "2.0",
+            "3.0",
+            "5.0"
+          ],
+          "description": "平滑核尺寸"
+        },
+        {
+          "name": "output_path",
+          "display_name": "保存路径 (可选)",
+          "intrinsic_type": "string",
+          "default_type": "string",
+          "default_value": "",
+          "presets": [],
+          "description": "可选输出路径"
+        }
+      ],
+      "output_type": "Image"
+    },
+    {
+      "tag": "ImageComparison",
+      "display_name": "图像比对与变动分析 (ImageComparison)",
+      "icon": "⚖️",
+      "platforms": "All",
+      "description": "比对两张图片是否相同，计算相似度百分比并标出变动区域",
+      "keywords": [
+        "similarity",
+        "diff",
+        "difference",
+        "compare",
+        "相似度",
+        "图像比对",
+        "变动分析",
+        "页面加载检测",
+        "自动化断言"
+      ],
+      "fields": [
+        {
+          "name": "image_a",
+          "display_name": "基准图像 A",
+          "intrinsic_type": "FilePicker",
+          "default_type": "string",
+          "default_value": "",
+          "presets": [],
+          "description": "基准图像"
+        },
+        {
+          "name": "image_b",
+          "display_name": "比对图像 B",
+          "intrinsic_type": "FilePicker",
+          "default_type": "string",
+          "default_value": "",
+          "presets": [],
+          "description": "当前比对图像"
+        },
+        {
+          "name": "diff_threshold",
+          "display_name": "像素差分灵敏度 (0~255)",
+          "intrinsic_type": "number",
+          "default_type": "number",
+          "default_value": "15",
+          "presets": [
+            "5",
+            "15",
+            "30"
+          ],
+          "description": "判定像素变动的阈值"
+        },
+        {
+          "name": "diff_output_path",
+          "display_name": "差异红框高亮存盘路径",
+          "intrinsic_type": "string",
+          "default_type": "string",
+          "default_value": "",
+          "presets": [],
+          "description": "变动区域标注存盘路径"
+        }
+      ],
+      "output_type": "real"
+    },
+    {
+      "tag": "ImageInRange",
+      "display_name": "颜色区间掩码提取 (ImageInRange)",
+      "icon": "🎚️",
+      "platforms": "All",
+      "description": "提取图片中指定颜色范围的内容（如仅保留红色印章），过滤背景杂色",
+      "keywords": [
+        "in_range",
+        "color_mask",
+        "hsv",
+        "掩码",
+        "印章提取",
+        "颜色过滤"
+      ],
+      "fields": [
+        {
+          "name": "image",
+          "display_name": "源图像路径或变量",
+          "intrinsic_type": "FilePicker",
+          "default_type": "string",
+          "default_value": "",
+          "presets": [],
+          "description": "输入图像"
+        },
+        {
+          "name": "lower_bound",
+          "display_name": "下界三元组",
+          "intrinsic_type": "string",
+          "default_type": "string",
+          "default_value": "0, 120, 70",
+          "presets": [
+            "0, 120, 70"
+          ],
+          "description": "如 0, 120, 70"
+        },
+        {
+          "name": "upper_bound",
+          "display_name": "上界三元组",
+          "intrinsic_type": "string",
+          "default_type": "string",
+          "default_value": "10, 255, 255",
+          "presets": [
+            "10, 255, 255"
+          ],
+          "description": "如 10, 255, 255"
+        },
+        {
+          "name": "color_space",
+          "display_name": "色彩空间 (HSV / RGB)",
+          "intrinsic_type": "string",
+          "default_type": "string",
+          "default_value": "HSV",
+          "presets": [
+            "HSV",
+            "RGB"
+          ],
+          "description": "色彩空间类型"
+        },
+        {
+          "name": "output_path",
+          "display_name": "保存路径 (可选)",
+          "intrinsic_type": "string",
+          "default_type": "string",
+          "default_value": "",
+          "presets": [],
+          "description": "可选输出路径"
+        }
+      ],
+      "output_type": "Image"
+    },
+    {
+      "tag": "ImageMorphology",
+      "display_name": "形态学操作 (ImageMorphology)",
+      "icon": "🧬",
+      "platforms": "All",
+      "description": "对黑白图片进行膨胀加粗、腐蚀变细或消除细小噪点",
+      "keywords": [
+        "morphology",
+        "dilate",
+        "erode",
+        "open",
+        "close",
+        "形态学",
+        "膨胀",
+        "腐蚀",
+        "开运算",
+        "闭运算",
+        "去噪",
+        "填孔"
+      ],
+      "fields": [
+        {
+          "name": "image",
+          "display_name": "源二值/灰度图像",
+          "intrinsic_type": "FilePicker",
+          "default_type": "string",
+          "default_value": "",
+          "presets": [],
+          "description": "二值或灰度图像"
+        },
+        {
+          "name": "operation",
+          "display_name": "操作模式",
+          "intrinsic_type": "string",
+          "default_type": "string",
+          "default_value": "Open",
+          "presets": [
+            "Open",
+            "Close",
+            "Dilate",
+            "Erode"
+          ],
+          "description": "开/闭/膨胀/腐蚀"
+        },
+        {
+          "name": "radius",
+          "display_name": "结构元素半径",
+          "intrinsic_type": "number",
+          "default_type": "number",
+          "default_value": "1",
+          "presets": [
+            "1",
+            "2",
+            "3",
+            "5"
+          ],
+          "description": "形态学核半径"
+        },
+        {
+          "name": "norm",
+          "display_name": "核形状 (LInf 方形 / L1 菱形)",
+          "intrinsic_type": "string",
+          "default_type": "string",
+          "default_value": "LInf",
+          "presets": [
+            "LInf",
+            "L1"
+          ],
+          "description": "结构元素拓扑"
+        },
+        {
+          "name": "output_path",
+          "display_name": "保存路径 (可选)",
+          "intrinsic_type": "string",
+          "default_type": "string",
+          "default_value": "",
+          "presets": [],
+          "description": "可选输出路径"
+        }
+      ],
+      "output_type": "Image"
+    },
+    {
+      "tag": "ImageRotate",
+      "display_name": "图像旋转与翻转 (ImageRotate)",
+      "icon": "🔄",
+      "platforms": "All",
+      "description": "将图片旋转 90 度、180 度或进行水平/垂直镜像翻转",
+      "keywords": [
+        "rotate",
+        "flip",
+        "旋转",
+        "翻转",
+        "顺时针",
+        "水平翻转",
+        "垂直翻转"
+      ],
+      "fields": [
+        {
+          "name": "image",
+          "display_name": "源图像路径或变量",
+          "intrinsic_type": "FilePicker",
+          "default_type": "string",
+          "default_value": "",
+          "presets": [],
+          "description": "输入图像"
+        },
+        {
+          "name": "angle",
+          "display_name": "旋转角度 (90, 180, 270)",
+          "intrinsic_type": "number",
+          "default_type": "number",
+          "default_value": "90",
+          "presets": [
+            "0",
+            "90",
+            "180",
+            "270"
+          ],
+          "description": "顺时针角度"
+        },
+        {
+          "name": "flip",
+          "display_name": "镜像翻转模式",
+          "intrinsic_type": "string",
+          "default_type": "string",
+          "default_value": "None",
+          "presets": [
+            "None",
+            "Horizontal",
+            "Vertical"
+          ],
+          "description": "无翻转/水平/垂直"
+        },
+        {
+          "name": "output_path",
+          "display_name": "保存路径 (可选)",
+          "intrinsic_type": "string",
+          "default_type": "string",
+          "default_value": "",
+          "presets": [],
+          "description": "可选输出路径"
+        }
+      ],
+      "output_type": "Image"
+    },
+    {
+      "tag": "ImageThreshold",
+      "display_name": "智能图像二值化 (ImageThreshold)",
+      "icon": "🌓",
+      "platforms": "All",
+      "description": "将彩色或灰度图片转为黑白二值图，方便文字识别或轮廓提取",
+      "keywords": [
+        "threshold",
+        "binarize",
+        "otsu",
+        "adaptive",
+        "二值化",
+        "黑白",
+        "大津法",
+        "自适应二值化",
+        "ocr增强"
+      ],
+      "fields": [
+        {
+          "name": "image",
+          "display_name": "源图像路径或变量",
+          "intrinsic_type": "FilePicker",
+          "default_type": "string",
+          "default_value": "",
+          "presets": [],
+          "description": "输入图像"
+        },
+        {
+          "name": "method",
+          "display_name": "二值化算法",
+          "intrinsic_type": "string",
+          "default_type": "string",
+          "default_value": "Otsu",
+          "presets": [
+            "Otsu",
+            "Fixed",
+            "Adaptive"
+          ],
+          "description": "大津自适应/固定/局部自适应"
+        },
+        {
+          "name": "thresh",
+          "display_name": "固定阈值 (0~255)",
+          "intrinsic_type": "number",
+          "default_type": "number",
+          "default_value": "128",
+          "presets": [
+            "64",
+            "128",
+            "192"
+          ],
+          "description": "Fixed模式阈值"
+        },
+        {
+          "name": "block_radius",
+          "display_name": "局部自适应半径",
+          "intrinsic_type": "number",
+          "default_type": "number",
+          "default_value": "5",
+          "presets": [
+            "3",
+            "5",
+            "9",
+            "15"
+          ],
+          "description": "Adaptive模式半径"
+        },
+        {
+          "name": "invert",
+          "display_name": "反色反转 (0 否 / 1 是)",
+          "intrinsic_type": "number",
+          "default_type": "number",
+          "default_value": "0",
+          "presets": [
+            "0",
+            "1"
+          ],
+          "description": "黑白倒置"
+        },
+        {
+          "name": "output_path",
+          "display_name": "保存路径 (可选)",
+          "intrinsic_type": "string",
+          "default_type": "string",
+          "default_value": "",
+          "presets": [],
+          "description": "可选输出路径"
+        }
+      ],
+      "output_type": "Image"
+    },
+    {
+      "tag": "MatchTemplate",
+      "display_name": "模板匹配定位 (MatchTemplate)",
+      "icon": "🧩",
+      "platforms": "All",
+      "description": "在屏幕或大图中寻找指定小图所在的位置，精准返回匹配中心坐标",
+      "keywords": [
+        "match",
+        "template",
+        "find_image",
+        "找图",
+        "模板匹配",
+        "屏幕定位",
+        "ncc",
+        "cross_correlation",
+        "dpi",
+        "多尺度"
+      ],
+      "fields": [
+        {
+          "name": "target",
+          "display_name": "模板小图路径或变量",
+          "intrinsic_type": "FilePicker",
+          "default_type": "string",
+          "default_value": "",
+          "presets": [],
+          "description": "待查找模板"
+        },
+        {
+          "name": "source",
+          "display_name": "源大图路径或变量",
+          "intrinsic_type": "FilePicker",
+          "default_type": "string",
+          "default_value": "",
+          "presets": [],
+          "description": "搜索源画面"
+        },
+        {
+          "name": "precision",
+          "display_name": "匹配精度阈值 (0.0~1.0)",
+          "intrinsic_type": "real",
+          "default_type": "real",
+          "default_value": "0.8",
+          "presets": [
+            "0.7",
+            "0.8",
+            "0.9",
+            "0.95"
+          ],
+          "description": "置信度门限"
+        },
+        {
+          "name": "search_region",
+          "display_name": "搜索区域 ROI",
+          "intrinsic_type": "string",
+          "default_type": "string",
+          "default_value": "",
+          "presets": [],
+          "description": "x, y, w, h 限制区域"
+        },
+        {
+          "name": "multi_scale",
+          "display_name": "多尺度搜索 (抗DPI)",
+          "intrinsic_type": "number",
+          "default_type": "number",
+          "default_value": "0",
+          "presets": [
+            "0",
+            "1"
+          ],
+          "description": "开启多尺度粗精匹配"
+        },
+        {
+          "name": "debug_save_path",
+          "display_name": "调试截图保存路径",
+          "intrinsic_type": "string",
+          "default_type": "string",
+          "default_value": "",
+          "presets": [],
+          "description": "可视化标记存盘路径"
+        }
+      ],
+      "output_type": "Point"
+    },
+    {
+      "tag": "ResizeImage",
+      "display_name": "图像尺寸缩放 (ResizeImage)",
+      "icon": "📐",
+      "platforms": "All",
+      "description": "按指定的宽度高度或按比例缩放图片尺寸",
+      "keywords": [
+        "resize",
+        "scale",
+        "缩放",
+        "放大",
+        "缩小",
+        "分辨率",
+        "比例"
+      ],
+      "fields": [
+        {
+          "name": "image",
+          "display_name": "源图像路径或变量",
+          "intrinsic_type": "FilePicker",
+          "default_type": "string",
+          "default_value": "",
+          "presets": [],
+          "description": "输入图像"
+        },
+        {
+          "name": "size",
+          "display_name": "目标尺寸/比例",
+          "intrinsic_type": "string",
+          "default_type": "string",
+          "default_value": "800, 600",
+          "presets": [
+            "800, 600",
+            "1920, 1080",
+            "0.5",
+            "2.0"
+          ],
+          "description": "宽, 高 或 比例因子"
+        },
+        {
+          "name": "mode",
+          "display_name": "模式 (Dimensions/Scale)",
+          "intrinsic_type": "string",
+          "default_type": "string",
+          "default_value": "Dimensions",
+          "presets": [
+            "Dimensions",
+            "Scale"
+          ],
+          "description": "绝对尺寸或比例"
+        },
+        {
+          "name": "keep_aspect_ratio",
+          "display_name": "保持宽高比",
+          "intrinsic_type": "number",
+          "default_type": "number",
+          "default_value": "0",
+          "presets": [
+            "0",
+            "1"
+          ],
+          "description": "是否锁定长宽比"
+        },
+        {
+          "name": "output_path",
+          "display_name": "保存路径 (可选)",
+          "intrinsic_type": "string",
+          "default_type": "string",
+          "default_value": "",
+          "presets": [],
+          "description": "可选输出路径"
+        }
+      ],
+      "output_type": "Image"
+    },
+    {
+      "tag": "ShapeRecognition",
+      "display_name": "几何形状识别与匹配 (ShapeRecognition)",
+      "icon": "🔺",
+      "platforms": "All",
+      "description": "自动识别图片中的圆形、矩形、三角形等多边形形状与位置",
+      "keywords": [
+        "shape",
+        "recognition",
+        "classify",
+        "circle",
+        "rectangle",
+        "triangle",
+        "形状识别",
+        "圆识别",
+        "矩形识别",
+        "多边形分类",
+        "Hu矩"
+      ],
+      "fields": [
+        {
+          "name": "image",
+          "display_name": "源图像路径或变量",
+          "intrinsic_type": "FilePicker",
+          "default_type": "string",
+          "default_value": "",
+          "presets": [],
+          "description": "二值或灰度图像"
+        },
+        {
+          "name": "mode",
+          "display_name": "工作模式",
+          "intrinsic_type": "string",
+          "default_type": "string",
+          "default_value": "GeometricClassify",
+          "presets": [
+            "GeometricClassify",
+            "TemplateMatch"
+          ],
+          "description": "几何分类或特征比对"
+        },
+        {
+          "name": "target_shape",
+          "display_name": "目标形状 (比对模式生效)",
+          "intrinsic_type": "string",
+          "default_type": "string",
+          "default_value": "Circle",
+          "presets": [
+            "Circle",
+            "Rectangle",
+            "Triangle",
+            "Polygon"
+          ],
+          "description": "目标形状名称"
+        },
+        {
+          "name": "min_area",
+          "display_name": "最小轮廓面积",
+          "intrinsic_type": "real",
+          "default_type": "real",
+          "default_value": "30.0",
+          "presets": [
+            "20.0",
+            "50.0",
+            "100.0"
+          ],
+          "description": "过滤小轮廓"
+        }
+      ],
+      "output_type": "string"
+    },
+    {
+      "tag": "TableGridDetect",
+      "display_name": "表格网格检测与单元格提取 (TableGridDetect)",
+      "icon": "▦",
+      "platforms": "All",
+      "description": "自动提取图片中的横线纵线，将表格精准分割为单元格坐标",
+      "keywords": [
+        "table",
+        "grid",
+        "表格识别",
+        "网格检测",
+        "单元格",
+        "形态学"
+      ],
+      "fields": [
+        {
+          "name": "image",
+          "display_name": "包含表格网格的源图像",
+          "intrinsic_type": "FilePicker",
+          "default_type": "string",
+          "default_value": "",
+          "presets": [],
+          "description": "表格截图或图像"
+        }
+      ],
+      "output_type": "TableGridResult"
+    }
+  ]
+}

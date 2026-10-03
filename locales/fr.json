@@ -1,0 +1,75 @@
+{
+  "name": "Recherche d'images & Vision par ordinateur (Image & Vision)",
+  "description": "Fournit la recherche d'images, détection de couleurs multipoints et analyse de contours",
+  "group": "Traitement d'images & vision",
+  "actions": {
+    "BlobAnalysis": {
+      "display_name": "Analyse de blobs & composantes connexes",
+      "description": "Analyse les blocs graphiques isolés, calcule leur taille, position et nombre"
+    },
+    "CropImage": {
+      "display_name": "Rogner l'image",
+      "description": "Découpe une zone rectangulaire définie dans une nouvelle image"
+    },
+    "CvtColor": {
+      "display_name": "Convertir l'espace colorimétrique",
+      "description": "Convertit l'espace colorimétrique d'une image (ex. RGB vers Niveaux de gris)"
+    },
+    "FindColor": {
+      "display_name": "Recherche de couleur / bloc",
+      "description": "Localise les coordonnées d'une couleur spécifique ou d'une plage de couleurs"
+    },
+    "FindContours": {
+      "display_name": "Détection & filtrage de contours",
+      "description": "Extrait les contours d'objets sur images binaires et calcule leur centre"
+    },
+    "FindMultiColor": {
+      "display_name": "Recherche de couleurs multipoints",
+      "description": "Localisation très précise par comparaison de plusieurs points de couleur relatifs"
+    },
+    "GetPixelColor": {
+      "display_name": "Obtenir la couleur du pixel",
+      "description": "Récupère la valeur RGB d'un pixel pour vérifier l'état d'un indicateur"
+    },
+    "ImageBlur": {
+      "display_name": "Floutage & Débruitage d'image",
+      "description": "Applique un flou gaussien pour éliminer le bruit sur l'image"
+    },
+    "ImageComparison": {
+      "display_name": "Comparaison d'images & Diff",
+      "description": "Compare deux images, calcule le pourcentage de similarité et surligne les écarts"
+    },
+    "ImageInRange": {
+      "display_name": "Extraction de masque par plage de couleurs",
+      "description": "Extrait un masque binaire isolant les pixels dans la plage de couleurs définie"
+    },
+    "ImageMorphology": {
+      "display_name": "Opérations morphologiques",
+      "description": "Exécute des opérations de dilatation, érosion, ouverture ou fermeture"
+    },
+    "ImageRotate": {
+      "display_name": "Faire pivoter & retourner l'image",
+      "description": "Pivote l'image selon un angle quelconque ou applique un miroir"
+    },
+    "ImageThreshold": {
+      "display_name": "Seuillage & binarisation d'image",
+      "description": "Convertit l'image en noir et blanc pur par seuillage adaptatif ou Otsu"
+    },
+    "MatchTemplate": {
+      "display_name": "Recherche par modèle (MatchTemplate)",
+      "description": "Recherche une image modèle sur l'écran ou dans une image plus grande"
+    },
+    "ResizeImage": {
+      "display_name": "Redimensionner l'image",
+      "description": "Redimensionne l'image selon des dimensions précises ou proportionnelles"
+    },
+    "ShapeRecognition": {
+      "display_name": "Reconnaissance de formes géométriques",
+      "description": "Détecte automatiquement les cercles, rectangles, triangles ou polygones"
+    },
+    "TableGridDetect": {
+      "display_name": "Détection de grille & cellules de tableau",
+      "description": "Détecte les lignes du tableau pour segmenter les cellules"
+    }
+  }
+}

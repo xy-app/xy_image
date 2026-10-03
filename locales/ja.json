@@ -1,0 +1,75 @@
+{
+  "name": "画像検索＆ビジョン認識 (Image & Vision)",
+  "description": "画面上の画像検索、複数点色検索、ピクセル色抽出、画像切り抜き、輪郭分析機能を提供します",
+  "group": "画像認識・処理",
+  "actions": {
+    "BlobAnalysis": {
+      "display_name": "連結成分・ブロブ解析",
+      "description": "画像内の独立した図形ブロックを解析し、サイズ、位置、個数を算出します"
+    },
+    "CropImage": {
+      "display_name": "画像トリミング",
+      "description": "指定した矩形領域を画像から切り抜き、新しい画像を生成します"
+    },
+    "CvtColor": {
+      "display_name": "色空間変換",
+      "description": "画像のカラーフォーマット（RGB、グレースケール、HSVなど）を変換します"
+    },
+    "FindColor": {
+      "display_name": "色検索・色ブロック位置特定",
+      "description": "画面または画像内で指定された色や色ブロックの位置を検索します"
+    },
+    "FindContours": {
+      "display_name": "輪郭抽出・フィルタリング",
+      "description": "二値化画像から物体の輪郭エッジを抽出し、中心位置やサイズを取得します"
+    },
+    "FindMultiColor": {
+      "display_name": "複数点アンカー色検索",
+      "description": "複数の相対座標の色情報を照合し、ノイズに強い高精度なターゲット特定を行います"
+    },
+    "GetPixelColor": {
+      "display_name": "ピクセル色取得・判定",
+      "description": "画面または画像上の指定座標のRGBカラー値を取得し、状態を高速判定します"
+    },
+    "ImageBlur": {
+      "display_name": "画像平滑化・ノイズ低減",
+      "description": "ガウシアンブラー等を用いて画像のノイズや粗さを滑らかに低減します"
+    },
+    "ImageComparison": {
+      "display_name": "画像差分・変化比較",
+      "description": "2つの画像を比較し、類似度のパーセンテージと変更領域を算出します"
+    },
+    "ImageInRange": {
+      "display_name": "色範囲マスク抽出",
+      "description": "色の上限と下限を設定し、条件に一致する領域を二値マスクとして抽出します"
+    },
+    "ImageMorphology": {
+      "display_name": "モルフォロジー演算",
+      "description": "膨張、収縮、オープニング、クロージングなどのモルフォロジー処理を実行します"
+    },
+    "ImageRotate": {
+      "display_name": "画像回転・反転",
+      "description": "任意の角度での画像回転、水平反転、垂直反転を実行します"
+    },
+    "ImageThreshold": {
+      "display_name": "適応型・二値化処理",
+      "description": "Otsu法や適応的しきい値処理を用いて画像を白黒の二値画像に変換します"
+    },
+    "MatchTemplate": {
+      "display_name": "テンプレートマッチング（画像検索）",
+      "description": "大画像や画面内から指定した小アイコン画像を相関マッチングで検索します"
+    },
+    "ResizeImage": {
+      "display_name": "画像サイズ変更",
+      "description": "指定した幅・高さまたは比率に基づいて画像サイズを拡大・縮小します"
+    },
+    "ShapeRecognition": {
+      "display_name": "幾何形状認識・照合",
+      "description": "画像内の円、四角形、三角形、多角形などの幾何学図形を自動識別します"
+    },
+    "TableGridDetect": {
+      "display_name": "表グリッド検出・セル分割",
+      "description": "画像内の罫線を検出し、表の格子構造から各セル領域を自動分割します"
+    }
+  }
+}
